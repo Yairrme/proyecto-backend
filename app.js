@@ -1,12 +1,16 @@
-const espress = require('express');
- 
-const app = espress();
 
-app	.get('/', (req, res) => {
-   // res.send('Hola mundo desde Express!')
-    res.sendFile(__dirname + '/index.html');
-});
+const express = require('express');
+const app = express();
+const port = 3000;
 
-app.listen(3000, () => {
-    console.log('servidor corriendo en el puerto 3000');
+app.use(express.json());
+
+// Rutas
+app.use('/alumnos', require('./routes/alumnoRoutes'));
+app.use('/profesores', require('./routes/profesorRoutes'));
+
+app.listen(port, () => {
+  console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+// Este es el archivo principal de la aplicación Express.
+// Aquí se configuran las rutas y se inicia el servidor en el puerto 3000.
